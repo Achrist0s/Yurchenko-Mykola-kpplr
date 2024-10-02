@@ -2,29 +2,33 @@ package com.example.myapplication
 
 import android.os.Bundle
 import android.widget.Button
-import android.widget.EditText
-import android.widget.Toast
+import android.widget.ImageView
 import androidx.appcompat.app.AppCompatActivity
+import kotlin.random.Random
 
 class MainActivity : AppCompatActivity() {
+
+    // Масив з ідентифікаторами зображень
+    private val images = arrayOf(
+        R.drawable.image1, // Замість image1 використайте ваші назви файлів
+        R.drawable.image2,
+        R.drawable.image3
+    )
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        val emailField: EditText = findViewById(R.id.etEmail)
-        val passwordField: EditText = findViewById(R.id.etPassword)
-        val registerButton: Button = findViewById(R.id.btnRegister)
+        val imageView: ImageView = findViewById(R.id.imageView)
+        val btnShowImage: Button = findViewById(R.id.btnShowImage)
 
-        registerButton.setOnClickListener {
-            val email = emailField.text.toString()
-            val password = passwordField.text.toString()
+        btnShowImage.setOnClickListener {
+            // Вибір випадкового зображення
+            val randomIndex = Random.nextInt(images.size)
+            val randomImage = images[randomIndex]
 
-            if (email.isEmpty() || password.isEmpty()) {
-                Toast.makeText(this, "Будь ласка, введіть усі дані", Toast.LENGTH_SHORT).show()
-            } else {
-                // Тут можна додати логіку для реєстрації користувача
-                Toast.makeText(this, "Реєстрація успішна!", Toast.LENGTH_SHORT).show()
-            }
+            // Встановлюємо випадкове зображення в ImageView
+            imageView.setImageResource(randomImage)
         }
     }
 }
